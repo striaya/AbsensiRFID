@@ -3,13 +3,17 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DeviceSeeder extends Seeder
 {
-    // DB::table('devices')->insert([
-    //             'device_name' => 'Device 1',
-    //             'api_key' => 'device1apikey',
-    //             'location' => 'Gerbang Sekolah',
-    //             'is_active' => true,
-    //     ]);
+    public function run(): void
+    {
+        DB::table('devices')->insert([
+            'device_name' => 'Device 1',
+            'api_key' => 'device1apikey',
+            'location' => 'Gerbang Sekolah',
+            'is_active' => true,
+        ]);
+    }
 }

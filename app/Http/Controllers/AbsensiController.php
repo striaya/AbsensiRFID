@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
+use App\Models\Device;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
@@ -52,24 +56,23 @@ class AbsensiController extends Controller
                 'message' => 'Check-in Recorded',
                 'nama' => $user->name,
             ]);
+        }
 
-            if ($absensi && ! $absensi->jam_keluar == null) {
-                $absensi->update([
-                    'jam_keluar' => carbon::now()->format('H:i:s'),
-                ]);
-
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Check-out Recorded',
-                    'nama' => $user->name,
-                ]);
-            }
+        if ($absensi && ! $absensi->jam_keluar == null) {
+            $absensi->update([
+                'jam_keluar' => carbon::now()->format('H:i:s'),
+            ]);
 
             return response()->json([
-                'status' => 'error',
-                'message' => 'You have already checked in and out today',
+                'status' => 'success',
+                'message' => 'Check-out Recorded',
                 'nama' => $user->name,
             ]);
         }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Already Checked Out',
+        ], 400);
     }
 }
