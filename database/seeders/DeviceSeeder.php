@@ -6,8 +6,10 @@ use Illuminate\Database\Seeder;
 
 class DeviceSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void {}
+    // DB::table('devices')->insert([
+    //             'device_name' => 'Device 1',
+    //             'api_key' => 'device1apikey',
+    //             'location' => 'Gerbang Sekolah',
+    //             'is_active' => true,
+    //     ]);
 }
