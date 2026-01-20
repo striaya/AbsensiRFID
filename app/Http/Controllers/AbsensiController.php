@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
-use App\Models\Device;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
@@ -74,5 +70,11 @@ class AbsensiController extends Controller
             'status' => 'error',
             'message' => 'Already Checked Out',
         ], 400);
+
+        if (! $device->is_active) {
+            return response()->json([
+                'message' => 'Device is inactive',
+            ], 403);
+        }
     }
 }
