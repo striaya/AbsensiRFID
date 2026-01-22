@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
+use App\Models\Device;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AbsensiController extends Controller
 {
