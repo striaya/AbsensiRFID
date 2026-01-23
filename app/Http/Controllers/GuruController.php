@@ -13,7 +13,7 @@ class GuruController extends Controller
         ]);
     }
 
-    public function store() {
+    public function store(Request $request) {
         $request->validate([
             'nama' => 'required|string',
             'nip' => 'required|unique:gurus',
