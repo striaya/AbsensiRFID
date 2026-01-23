@@ -62,8 +62,11 @@ class GuruController extends Controller
             'email' => 'required|email|unique:gurus,email,' .$id
         ]);
 
-        $guru->update($request->all());
-
+        $guru->nama = $request->nama;
+        $guru->nip = $request->nip;
+        $guru->email = $request->email;
+        $guru->save();
+        
         return response()->json([
             'success' => true,
             'message' => 'Guru berhasil diupdate',

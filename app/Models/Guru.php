@@ -10,8 +10,6 @@ class Guru extends Model
 
     use HasFactory;
 
-    protected $table = 'gurus';
-
     protected $fillabel = [
         'nama',
         'nip',
