@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -58,7 +59,7 @@ class GuruController extends Controller
         $request->validate([
             'nama' => 'required',
             'nip' => 'required|unique:gurus,nip,' .$id,
-            'email' => 'required|email|enique:gurus,email, ' .$id
+            'email' => 'required|email|unique:gurus,email,' .$id
         ]);
 
         $guru->update($request->all());
