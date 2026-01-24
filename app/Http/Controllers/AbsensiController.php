@@ -80,5 +80,62 @@ class AbsensiController extends Controller
                 'message' => 'Device is inactive',
             ], 403);
         }
-    }
-}
+        }
+        public function keluar(Request $request){
+            $request->validate([
+                'api_key' => 'required',
+                'rfid_uid' => 'required'
+            ]);
+
+            $device = Device::where('api_key', $request->api_key)->first();
+
+            if(!$device) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Device tidak ditemukan'
+                ], 401);
+            }
+
+            if(!$device->is_active) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Device nonaktif'
+                ], 403);
+            }
+
+            $user = User::where('rfid_uid', $request->rfid_uid)->first();
+
+            if(!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User tidak ditemuka'
+                ], 404);
+            }
+
+            $absensi = Absensi::where('user_id', $user->id)
+                ->whereDate('tanggal', Carbon::today())
+                ->whereNull('jam_keluar')
+                ->first();
+
+                if(!$absensi) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Absensi keluar tidak ditemukan atau sudah melakukan absensi keluar'
+                    ], 400);
+                }
+
+                $absensi->update([
+                    'jam_keluar' => Carbon::now()->format('H:i:s')
+                ]);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Absensi keluar berhasil',
+                    'data' => [
+                        'nama' => $user->name,
+                        'tanggal' => $absensi->tanggal,
+                        'jam_keluar'=> $absensi->jam_keluar
+                    ]
+                ]);
+            }
+        }
