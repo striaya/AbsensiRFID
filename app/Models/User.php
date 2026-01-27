@@ -13,6 +13,10 @@ class User extends Authenticatable
     public function absensis(){
         return $this->hasMany(Absensi::class);
     }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -25,6 +29,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rfid_uid',
+        'role',
     ];
 
     /**
