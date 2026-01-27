@@ -10,13 +10,7 @@ use App\Models\Absensi;
 
 class User extends Authenticatable
 {
-    public function absensis(){
-        return $this->hasMany(Absensi::class);
-    }
-
-    public function role() {
-        return $this->belongsTo(Role::class);
-    }
+    
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -48,6 +42,25 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    public function absensis(){
+        return $this->hasMany(Absensi::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isGuru(): bool
+    {
+        return $this->role === 'guru';
+    }
+
+    public function isMurid(): bool 
+    {
+        return $this->role === 'murid';
+    }
+
     protected function casts(): array
     {
         return [
