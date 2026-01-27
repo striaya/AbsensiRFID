@@ -12,7 +12,7 @@ class Absensi extends Model
         'device_id',
         'tanggal',
         'jam_masuk',
-        'jam_keluar',
+        'jam_keluar'
     ];
 
     public function user()

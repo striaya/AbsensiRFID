@@ -11,7 +11,7 @@ class Device extends Model
         'device_name',
         'api_key',
         'location',
-        'is_active',
+        'is_active'
         ];
         
         public function absensis()
