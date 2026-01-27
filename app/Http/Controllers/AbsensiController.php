@@ -52,9 +52,13 @@ class AbsensiController extends Controller
             ]);
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'Check-in Recorded',
-                'nama' => $user->name,
+                'success' => true,
+                'message' => 'Jam masuk berhasil',
+                'data' => [
+                    'nama' => $user->name,
+                    'role' => $user->role,
+                    'jam_masuk' => $today
+                ]
             ]);
         }
 
@@ -64,9 +68,13 @@ class AbsensiController extends Controller
             ]);
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'Check-out Recorded',
-                'nama' => $user->name,
+                'success' => true,
+                'message' => 'Jam keluar berhasil',
+                'data' => [
+                    'nama' => $user->name,
+                    'role' => $user->role,
+                    'jam_keluar' => $today
+                ]
             ]);
         }
 
